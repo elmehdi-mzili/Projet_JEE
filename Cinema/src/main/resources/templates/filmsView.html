@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>Page Films</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="m-5">
+			<div class="card">
+				<div class="card-header">Liste des films</div>
+				<div class="card-body">
+
+					<form method="get" th:action="@{films}">
+						<div class="form-group">
+							<label>Name : </label> <input type="text" name="keyword"
+								th:value="${keyword}">
+							<button class="btn btn-success">Rechercher</button>
+							<a class="btn btn-success" th:href="@{formFilm}">Ajouter</a>
+						</div>
+					</form>
+
+					<table class="table">
+						<tr>
+							<th>Name</th>
+							<th>Date Sortie</th>
+							<th>Duree</th>
+							<th>Description</th>
+							<th>Realisateur</th>
+							<th>Categorie ID</th>
+							<th></th>
+						</tr>
+						<tr th:each="p:${listFilms}">
+
+							<td><img alt="Image" th:src="@{'image/' + ${p.photo}}"
+								width="250" height="250" th:text=" ${p.name}" /></td>
+							<td th:text="${p.dateSortie}"></td>
+							<td th:text="${p.duree}"></td>
+							<td th:text="${p.description}"></td>
+							<td th:text="${p.realisateur}"></td>
+							<td th:text="${p.categorie.id}"></td>
+							<td><a
+								onclick="return confirm('Etes vous sure de vouloir supprimer ?')"
+								class="btn btn-danger"
+								th:href="@{deleteFilm(id=${p.id},keyword=${keyword},page=${currentPage},size=${size})}">Delete</a>
+								<a class="btn btn-danger" th:href="@{editFilm(id=${p.id})}">
+									Modifier </a></td>
+						</tr>
+					</table>
+					<ul class="nav nav-pills">
+						<li th:each="page,status:${pages}"><a
+							th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+							th:href="@{films(page=${status.index}, keyword=${keyword})}"
+							th:text="${status.index}"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>

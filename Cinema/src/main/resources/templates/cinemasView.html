@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>Page Categories</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="m-5">
+			<div class="card">
+				<div class="card-header">Liste des cinemas</div>
+				<div class="card-body">
+
+					<form method="get" th:action="cinemas">
+						<div class="form-group">
+							<label>Name : </label> <input type="text" name="keyword"
+								th:value="${keyword}">
+							<button class="btn btn-success">Rechercher</button>
+							<a class="btn btn-success" th:href="@{formCinema}">Ajouter</a>
+						</div>
+					</form>
+
+
+					<table class="table">
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Altitude</th>
+							<th>Latitude</th>
+							<th>Longtitude</th>
+							<th>nombre Salles</th>
+							<th>Villes id</th>
+							<th>Mise a jour</th>
+						</tr>
+						<tr th:each="p:${listCinemas}">
+
+							<td th:text="${p.id}"></td>
+							<td th:text="${p.name}"></td>
+							<td th:text="${p.altitude}"></td>
+							<td th:text="${p.latitude}"></td>
+							<td th:text="${p.longtitude}"></td>
+							<td th:text="${p.nombreSalles}"></td>
+							<td th:text="${p.ville.id}"></td>
+							<td><a
+								onclick="return confirm('Etes vous sure de vouloir supprimer ?')"
+								class="btn btn-danger"
+								th:href="@{deleteCinema(id=${p.id},keyword=${keyword},page=${currentPage},size=${size})}">
+									Supprimer </a> <a class="btn btn-danger"
+								th:href="@{editCinema(id=${p.id})}">
+									Modifier </a></td>
+
+						</tr>
+					</table>
+					<ul class="nav nav-pills">
+						<li th:each="page,status:${pages}"><a
+							th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+							th:href="@{cinemas(page=${status.index}, keyword=${keyword})}"
+							th:text="${status.index}"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

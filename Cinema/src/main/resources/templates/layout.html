@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>Gestion cinema</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"
+          th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+	
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" th:href="@{index}">Cinema App</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{index}">Home</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+       Gestion
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" th:href="@{categories}">Categories</a>
+        <a class="dropdown-item" th:href="@{cinemas}">Cinemas</a>
+        <a class="dropdown-item" th:href="@{films}">Films</a>
+        <a class="dropdown-item" th:href="@{projections}">Projections</a>
+        
+      </div>
+    </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+  	 <!-- Dropdown -->
+  <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+       [Username]
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" th:href="@{categories}">Login</a>
+        <a class="dropdown-item" th:href="@{cinemas}">Logout</a>
+        <a class="dropdown-item" th:href="@{films}">Profile</a>
+        
+      </div>
+    </li>
+  </ul>
+</nav>
+	
+	<section layout:fragment="content">
+	
+	</section>
+
+<footer class="navbar-fixed-bottom">
+ </footer> 
+
+
+</body>
+</html>
